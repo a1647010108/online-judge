@@ -1,4 +1,4 @@
-# online-judge
+# online-judge-vue
 
 ## Project setup
 ```

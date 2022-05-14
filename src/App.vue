@@ -1,15 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <nav>
+
+  </nav>
+  <router-view/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import {getData} from "./http/api"
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  setup(){
+    getData.then(res=>{
+      console.log(res)
+    })
   }
 }
 </script>
