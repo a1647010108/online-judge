@@ -9,14 +9,14 @@
     >
       <h4>后台系统登录</h4>
       <el-form-item label="账号">
-        <el-input v-model="loginData.name" placeholder="请输入账号"/>
+        <el-input placeholder="请输入账号" v-model="loginData.name"/>
       </el-form-item>
       <el-form-item label="密码">
         <el-input
             v-model="loginData.password" type="password" placeholder="请输入密码" show-password/>
       </el-form-item>
       <el-form-item>
-        <el-button class="sub-btn" type="primary">登录</el-button>
+        <el-button @click="subFun" class="sub-btn" type="primary">登录</el-button>
       </el-form-item>
 
     </el-form>
@@ -26,6 +26,9 @@
 
 <script>
 import {reactive} from "vue"
+import {ElMessage} from 'element-plus'
+import {login} from "@/http/api";
+import router from "../router"
 
 export default {
   name: "LoginView",
@@ -34,26 +37,45 @@ export default {
       name: "",
       password: ""
     })
+    let subFun = () => {
+      if (!loginData.name || !loginData.password) {
+        ElMessage({
+          showClose: true,
+          message: '请先填写账号或者密码',
+          type: 'error',
+        })
+        return
+      }
+      // 登录操作
+      login(loginData).then(res => {
+        console.log(res)
+        router.push("/about")
+      })
+
+    }
 
     return {
-      loginData
+      loginData,
+      subFun
     }
   }
 }
 </script>
 
 <style scoped>
-.login{
+.login {
   width: 600px;
   margin: 150px auto;
   border: 1px solid #2c3e50;
   border-radius: 10px;
   padding: 20px;
 }
-h4{
+
+h4 {
   text-align: center;
 }
-.sub-btn{
+
+.sub-btn {
   width: 100%;
 }
 </style>

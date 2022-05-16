@@ -6,16 +6,12 @@
 </template>
 
 <script>
-import {getData} from "./http/api"
 export default {
   name: 'App',
   components: {
   },
-  setup(){
-    getData.then(res=>{
-      console.log(res)
-    })
-  }
+
+
 }
 </script>
 
